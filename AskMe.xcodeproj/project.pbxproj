@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		016A239513BFBE6F00A605E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239413BFBE6F00A605E4 /* UIKit.framework */; };
+		016A239713BFBE6F00A605E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239613BFBE6F00A605E4 /* Foundation.framework */; };
+		016A239913BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239813BFBE6F00A605E4 /* CoreGraphics.framework */; };
+		016A239F13BFBE6F00A605E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 016A239D13BFBE6F00A605E4 /* InfoPlist.strings */; };
+		016A23A213BFBE6F00A605E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A23A113BFBE6F00A605E4 /* main.m */; };
+		016A23A513BFBE6F00A605E4 /* AskMeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A23A413BFBE6F00A605E4 /* AskMeAppDelegate.m */; };
+		016A23A813BFBE6F00A605E4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016A23A613BFBE6F00A605E4 /* MainWindow.xib */; };
+		016A23AB13BFBE6F00A605E4 /* AskMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A23AA13BFBE6F00A605E4 /* AskMeViewController.m */; };
+		016A23AE13BFBE6F00A605E4 /* AskMeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016A23AC13BFBE6F00A605E4 /* AskMeViewController.xib */; };
+		016A23B513BFBE6F00A605E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239413BFBE6F00A605E4 /* UIKit.framework */; };
+		016A23B613BFBE6F00A605E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239613BFBE6F00A605E4 /* Foundation.framework */; };
+		016A23B713BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239813BFBE6F00A605E4 /* CoreGraphics.framework */; };
+		016A23BF13BFBE6F00A605E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 016A23BD13BFBE6F00A605E4 /* InfoPlist.strings */; };
+		016A23C213BFBE6F00A605E4 /* AskMeTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 016A23C113BFBE6F00A605E4 /* AskMeTests.h */; };
+		016A23C413BFBE6F00A605E4 /* AskMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A23C313BFBE6F00A605E4 /* AskMeTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		016A23B813BFBE6F00A605E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 016A238713BFBE6F00A605E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 016A238F13BFBE6F00A605E4;
+			remoteInfo = AskMe;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		016A239013BFBE6F00A605E4 /* AskMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AskMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		016A239413BFBE6F00A605E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		016A239613BFBE6F00A605E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		016A239813BFBE6F00A605E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		016A239C13BFBE6F00A605E4 /* AskMe-Info.plist */ = {isa = PBXFileReference; path = "AskMe-Info.plist"; sourceTree = "<group>"; };
+		016A239E13BFBE6F00A605E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		016A23A013BFBE6F00A605E4 /* AskMe-Prefix.pch */ = {isa = PBXFileReference; path = "AskMe-Prefix.pch"; sourceTree = "<group>"; };
+		016A23A113BFBE6F00A605E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		016A23A313BFBE6F00A605E4 /* AskMeAppDelegate.h */ = {isa = PBXFileReference; path = AskMeAppDelegate.h; sourceTree = "<group>"; };
+		016A23A413BFBE6F00A605E4 /* AskMeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AskMeAppDelegate.m; sourceTree = "<group>"; };
+		016A23A713BFBE6F00A605E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		016A23A913BFBE6F00A605E4 /* AskMeViewController.h */ = {isa = PBXFileReference; path = AskMeViewController.h; sourceTree = "<group>"; };
+		016A23AA13BFBE6F00A605E4 /* AskMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AskMeViewController.m; sourceTree = "<group>"; };
+		016A23AD13BFBE6F00A605E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AskMeViewController.xib; sourceTree = "<group>"; };
+		016A23B413BFBE6F00A605E4 /* AskMeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AskMeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		016A23BC13BFBE6F00A605E4 /* AskMeTests-Info.plist */ = {isa = PBXFileReference; path = "AskMeTests-Info.plist"; sourceTree = "<group>"; };
+		016A23BE13BFBE6F00A605E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		016A23C013BFBE6F00A605E4 /* AskMeTests-Prefix.pch */ = {isa = PBXFileReference; path = "AskMeTests-Prefix.pch"; sourceTree = "<group>"; };
+		016A23C113BFBE6F00A605E4 /* AskMeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AskMeTests.h; sourceTree = "<group>"; };
+		016A23C313BFBE6F00A605E4 /* AskMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AskMeTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		016A238D13BFBE6F00A605E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016A239513BFBE6F00A605E4 /* UIKit.framework in Frameworks */,
+				016A239713BFBE6F00A605E4 /* Foundation.framework in Frameworks */,
+				016A239913BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		016A23B013BFBE6F00A605E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016A23B513BFBE6F00A605E4 /* UIKit.framework in Frameworks */,
+				016A23B613BFBE6F00A605E4 /* Foundation.framework in Frameworks */,
+				016A23B713BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		016A238513BFBE6F00A605E4 = {
+			isa = PBXGroup;
+			children = (
+				016A239A13BFBE6F00A605E4 /* AskMe */,
+				016A23BA13BFBE6F00A605E4 /* AskMeTests */,
+				016A239313BFBE6F00A605E4 /* Frameworks */,
+				016A239113BFBE6F00A605E4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		016A239113BFBE6F00A605E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				016A239013BFBE6F00A605E4 /* AskMe.app */,
+				016A23B413BFBE6F00A605E4 /* AskMeTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		016A239313BFBE6F00A605E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				016A239413BFBE6F00A605E4 /* UIKit.framework */,
+				016A239613BFBE6F00A605E4 /* Foundation.framework */,
+				016A239813BFBE6F00A605E4 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		016A239A13BFBE6F00A605E4 /* AskMe */ = {
+			isa = PBXGroup;
+			children = (
+				016A23A313BFBE6F00A605E4 /* AskMeAppDelegate.h */,
+				016A23A413BFBE6F00A605E4 /* AskMeAppDelegate.m */,
+				016A23A613BFBE6F00A605E4 /* MainWindow.xib */,
+				016A23A913BFBE6F00A605E4 /* AskMeViewController.h */,
+				016A23AA13BFBE6F00A605E4 /* AskMeViewController.m */,
+				016A23AC13BFBE6F00A605E4 /* AskMeViewController.xib */,
+				016A239B13BFBE6F00A605E4 /* Supporting Files */,
+			);
+			path = AskMe;
+			sourceTree = "<group>";
+		};
+		016A239B13BFBE6F00A605E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				016A239C13BFBE6F00A605E4 /* AskMe-Info.plist */,
+				016A239D13BFBE6F00A605E4 /* InfoPlist.strings */,
+				016A23A013BFBE6F00A605E4 /* AskMe-Prefix.pch */,
+				016A23A113BFBE6F00A605E4 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		016A23BA13BFBE6F00A605E4 /* AskMeTests */ = {
+			isa = PBXGroup;
+			children = (
+				016A23C113BFBE6F00A605E4 /* AskMeTests.h */,
+				016A23C313BFBE6F00A605E4 /* AskMeTests.m */,
+				016A23BB13BFBE6F00A605E4 /* Supporting Files */,
+			);
+			path = AskMeTests;
+			sourceTree = "<group>";
+		};
+		016A23BB13BFBE6F00A605E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				016A23BC13BFBE6F00A605E4 /* AskMeTests-Info.plist */,
+				016A23BD13BFBE6F00A605E4 /* InfoPlist.strings */,
+				016A23C013BFBE6F00A605E4 /* AskMeTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		016A238F13BFBE6F00A605E4 /* AskMe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 016A23C713BFBE6F00A605E4 /* Build configuration list for PBXNativeTarget "AskMe" */;
+			buildPhases = (
+				016A238C13BFBE6F00A605E4 /* Sources */,
+				016A238D13BFBE6F00A605E4 /* Frameworks */,
+				016A238E13BFBE6F00A605E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AskMe;
+			productName = AskMe;
+			productReference = 016A239013BFBE6F00A605E4 /* AskMe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		016A23B313BFBE6F00A605E4 /* AskMeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 016A23CA13BFBE6F00A605E4 /* Build configuration list for PBXNativeTarget "AskMeTests" */;
+			buildPhases = (
+				016A23AF13BFBE6F00A605E4 /* Sources */,
+				016A23B013BFBE6F00A605E4 /* Frameworks */,
+				016A23B113BFBE6F00A605E4 /* Resources */,
+				016A23B213BFBE6F00A605E4 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				016A23B913BFBE6F00A605E4 /* PBXTargetDependency */,
+			);
+			name = AskMeTests;
+			productName = AskMeTests;
+			productReference = 016A23B413BFBE6F00A605E4 /* AskMeTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		016A238713BFBE6F00A605E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Dorkfort.com;
+			};
+			buildConfigurationList = 016A238A13BFBE6F00A605E4 /* Build configuration list for PBXProject "AskMe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 016A238513BFBE6F00A605E4;
+			productRefGroup = 016A239113BFBE6F00A605E4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				016A238F13BFBE6F00A605E4 /* AskMe */,
+				016A23B313BFBE6F00A605E4 /* AskMeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		016A238E13BFBE6F00A605E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016A239F13BFBE6F00A605E4 /* InfoPlist.strings in Resources */,
+				016A23A813BFBE6F00A605E4 /* MainWindow.xib in Resources */,
+				016A23AE13BFBE6F00A605E4 /* AskMeViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		016A23B113BFBE6F00A605E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016A23BF13BFBE6F00A605E4 /* InfoPlist.strings in Resources */,
+				016A23C213BFBE6F00A605E4 /* AskMeTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		016A23B213BFBE6F00A605E4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		016A238C13BFBE6F00A605E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016A23A213BFBE6F00A605E4 /* main.m in Sources */,
+				016A23A513BFBE6F00A605E4 /* AskMeAppDelegate.m in Sources */,
+				016A23AB13BFBE6F00A605E4 /* AskMeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		016A23AF13BFBE6F00A605E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016A23C413BFBE6F00A605E4 /* AskMeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		016A23B913BFBE6F00A605E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 016A238F13BFBE6F00A605E4 /* AskMe */;
+			targetProxy = 016A23B813BFBE6F00A605E4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		016A239D13BFBE6F00A605E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				016A239E13BFBE6F00A605E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		016A23A613BFBE6F00A605E4 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				016A23A713BFBE6F00A605E4 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		016A23AC13BFBE6F00A605E4 /* AskMeViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				016A23AD13BFBE6F00A605E4 /* en */,
+			);
+			name = AskMeViewController.xib;
+			sourceTree = "<group>";
+		};
+		016A23BD13BFBE6F00A605E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				016A23BE13BFBE6F00A605E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		016A23C513BFBE6F00A605E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		016A23C613BFBE6F00A605E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		016A23C813BFBE6F00A605E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AskMe/AskMe-Prefix.pch";
+				INFOPLIST_FILE = "AskMe/AskMe-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		016A23C913BFBE6F00A605E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AskMe/AskMe-Prefix.pch";
+				INFOPLIST_FILE = "AskMe/AskMe-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		016A23CB13BFBE6F00A605E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AskMe.app/AskMe";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AskMeTests/AskMeTests-Prefix.pch";
+				INFOPLIST_FILE = "AskMeTests/AskMeTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		016A23CC13BFBE6F00A605E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AskMe.app/AskMe";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AskMeTests/AskMeTests-Prefix.pch";
+				INFOPLIST_FILE = "AskMeTests/AskMeTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		016A238A13BFBE6F00A605E4 /* Build configuration list for PBXProject "AskMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				016A23C513BFBE6F00A605E4 /* Debug */,
+				016A23C613BFBE6F00A605E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		016A23C713BFBE6F00A605E4 /* Build configuration list for PBXNativeTarget "AskMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				016A23C813BFBE6F00A605E4 /* Debug */,
+				016A23C913BFBE6F00A605E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		016A23CA13BFBE6F00A605E4 /* Build configuration list for PBXNativeTarget "AskMeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				016A23CB13BFBE6F00A605E4 /* Debug */,
+				016A23CC13BFBE6F00A605E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 016A238713BFBE6F00A605E4 /* Project object */;
+}
