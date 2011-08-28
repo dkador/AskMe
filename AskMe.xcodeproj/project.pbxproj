@@ -14,7 +14,6 @@
 		016A23A213BFBE6F00A605E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A23A113BFBE6F00A605E4 /* main.m */; };
 		016A23A513BFBE6F00A605E4 /* AskMeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A23A413BFBE6F00A605E4 /* AskMeAppDelegate.m */; };
 		016A23A813BFBE6F00A605E4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016A23A613BFBE6F00A605E4 /* MainWindow.xib */; };
-		016A23AB13BFBE6F00A605E4 /* AskMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A23AA13BFBE6F00A605E4 /* AskMeViewController.m */; };
 		016A23B513BFBE6F00A605E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239413BFBE6F00A605E4 /* UIKit.framework */; };
 		016A23B613BFBE6F00A605E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239613BFBE6F00A605E4 /* Foundation.framework */; };
 		016A23B713BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239813BFBE6F00A605E4 /* CoreGraphics.framework */; };
@@ -71,8 +70,6 @@
 		016A23A313BFBE6F00A605E4 /* AskMeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AskMeAppDelegate.h; sourceTree = "<group>"; };
 		016A23A413BFBE6F00A605E4 /* AskMeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AskMeAppDelegate.m; sourceTree = "<group>"; };
 		016A23A713BFBE6F00A605E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		016A23A913BFBE6F00A605E4 /* AskMeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AskMeViewController.h; sourceTree = "<group>"; };
-		016A23AA13BFBE6F00A605E4 /* AskMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AskMeViewController.m; sourceTree = "<group>"; };
 		016A23B413BFBE6F00A605E4 /* AskMeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AskMeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		016A23BC13BFBE6F00A605E4 /* AskMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AskMeTests-Info.plist"; sourceTree = "<group>"; };
 		016A23BE13BFBE6F00A605E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -204,8 +201,6 @@
 				016A23A313BFBE6F00A605E4 /* AskMeAppDelegate.h */,
 				016A23A413BFBE6F00A605E4 /* AskMeAppDelegate.m */,
 				016A23A613BFBE6F00A605E4 /* MainWindow.xib */,
-				016A23A913BFBE6F00A605E4 /* AskMeViewController.h */,
-				016A23AA13BFBE6F00A605E4 /* AskMeViewController.m */,
 				016A23CD13BFBF3B00A605E4 /* QuestionController.h */,
 				016A23CE13BFBF3B00A605E4 /* QuestionController.m */,
 				016A242C13BFD09800A605E4 /* ChoicesController.h */,
@@ -448,7 +443,6 @@
 			files = (
 				016A23A213BFBE6F00A605E4 /* main.m in Sources */,
 				016A23A513BFBE6F00A605E4 /* AskMeAppDelegate.m in Sources */,
-				016A23AB13BFBE6F00A605E4 /* AskMeViewController.m in Sources */,
 				016A23CF13BFBF3B00A605E4 /* QuestionController.m in Sources */,
 				016A242E13BFD09800A605E4 /* ChoicesController.m in Sources */,
 				01FFA05413C236CF005C9826 /* AddChoiceController.m in Sources */,
