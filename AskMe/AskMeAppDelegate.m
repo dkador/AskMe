@@ -7,8 +7,10 @@
 //
 
 #import "AskMeAppDelegate.h"
+#import "QuestionController.h"
+#import "WaitingController.h"
+#import "Util.h"
 
-#import "AskMeViewController.h"
 
 @implementation AskMeAppDelegate
 
@@ -17,52 +19,63 @@
 
 @synthesize viewController=_viewController;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    id remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSLog(@"remote: %@", remoteNotification);
+        
     // Override point for customization after application launch.
-     
+    QuestionController *theController = [[QuestionController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:theController];
+    [theController release];
+    [self setViewController:navController];
+    [navController release];
     self.window.rootViewController = self.viewController;
+    
+    NSNumber *currentQuestionId = [Util currentQuestionId];
+    if (currentQuestionId) {
+        // go straight to it.
+        WaitingController *waitingController = [[WaitingController alloc] init];
+        waitingController.questionAlreadyCreated = YES;
+        waitingController.questionId = currentQuestionId;
+        [self.viewController pushViewController:waitingController animated:NO];
+        [waitingController setupTimer];
+        [waitingController release];
+    }
+    
     [self.window makeKeyAndVisible];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    /*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
+// Delegation methods
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+    NSString *token = [[devToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<> "]];
+    NSLog(@"token 1: %@", token);
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"token 2: %@", token);
+    [Util setDeviceToken:token];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     */
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    NSLog(@"Error in registration. Error: %@", err);
+    [Util removeDeviceToken];    
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    /*
-     Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     */
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    NSLog(@"got a remote notification %@", userInfo);
+    NSNumber *questionId = [userInfo objectForKey:@"question_id"];
+    if (questionId) {
+        NSLog(@"remote notification had question %@", questionId);
+        if ([self.viewController.visibleViewController isKindOfClass:[WaitingController class]]) {
+            NSLog(@"user is already viewing waiting screen, force a reload");
+            WaitingController *controller = (WaitingController *) self.viewController.visibleViewController;
+            [controller refresh];
+        }
+    }
 }
 
 - (void)dealloc

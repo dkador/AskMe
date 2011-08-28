@@ -1,0 +1,6 @@
+[submodule "ext/TouchJSON"]
+	path = ext/TouchJSON
+	url = git://github.com/TouchCode/TouchJSON.git
+[submodule "ext/asi-http-request"]
+	path = ext/asi-http-request
+	url = https://github.com/pokeb/asi-http-request.git

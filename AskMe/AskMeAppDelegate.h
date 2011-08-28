@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class AskMeViewController;
 
 @interface AskMeAppDelegate : NSObject <UIApplicationDelegate> {
 
@@ -16,6 +15,6 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
-@property (nonatomic, retain) IBOutlet AskMeViewController *viewController;
+@property (nonatomic, retain) IBOutlet UINavigationController *viewController;
 
 @end
