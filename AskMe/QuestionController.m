@@ -54,37 +54,31 @@
     [super viewDidLoad];
     
     [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-    [[self navigationItem] setTitle:@"AskMe"];
+    
     UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(nextSelected)];
     [nextButton setEnabled:NO];
     [[self navigationItem] setRightBarButtonItem:nextButton];
     [nextButton release];
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    
-    UILabel *label = [[UILabel alloc] init];
-    [label setFrame:CGRectMake(20, 7, bounds.size.width - 40, 44)];
-    [label setText:@"Enter your question."];
-    [label setBackgroundColor:[UIColor clearColor]];
-    [[self view] addSubview:label];
-    
+        
     UITextView *theTextView = [[UITextView alloc] init];
     [self setQuestionTextView:theTextView];
     [theTextView release];
-    [[self questionTextView] setFrame:CGRectMake(20, 50, bounds.size.width - 40, 140)];
+    [[self questionTextView] setFrame:CGRectMake(0, 0, bounds.size.width, bounds.size.height-216)];
     [[self questionTextView] setDelegate:self];
     [[self questionTextView] setFont:[UIFont systemFontOfSize:14]];
     [[self view] addSubview:[self questionTextView]];
     [[self questionTextView] becomeFirstResponder];
-    self.questionTextView.layer.cornerRadius = 5;
+    //self.questionTextView.layer.cornerRadius = 5;
     self.questionTextView.clipsToBounds = YES;
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+-(void)viewDidAppear:(BOOL)animated {
+    self.navigationItem.title = @"New Question";
+}
+
+- (void)viewWillAppear:(BOOL)animated {
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -99,6 +93,7 @@
     NSLog(@"next selected");
     ChoicesController *choicesController = [[ChoicesController alloc] initWithStyle:UITableViewStyleGrouped];
     [choicesController setQuestion:[[self questionTextView] text]];
+    self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
     [[self navigationController] pushViewController:choicesController animated:YES];
     [choicesController release];
 }

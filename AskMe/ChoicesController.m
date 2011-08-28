@@ -8,6 +8,7 @@
 
 #import "ChoicesController.h"
 #import "WaitingController.h"
+#import "Util.h"
 
 
 @interface ChoicesController()
@@ -42,10 +43,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"New Choices";
 
     UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(addSelected)];
+    nextButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = nextButton;
     [nextButton release];
+    
+    self.tableView.editing = YES;
+    self.tableView.allowsSelectionDuringEditing = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -59,17 +66,25 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2; // 1 for orig question, 1 for choices
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[self choices] count] + 1;
+    if (section == 0) {
+        return 1;
+    } else {
+        return [[self choices] count] + 1;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [NSString stringWithFormat:@"%@\nAdd answers!", self.question];
+    if (section == 0) {
+        return @"Your Question";
+    } else {
+        return @"Your Choices";
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -79,28 +94,98 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        cell.textLabel.numberOfLines = 0;
     }
     
     // Configure the cell...
-    if (indexPath.row < [self.choices count]) {
-        cell.textLabel.text = [self.choices objectAtIndex:indexPath.row];
+    if (indexPath.section == 0) {
+        UIFont *font = [UIFont systemFontOfSize:16];
+        cell.textLabel.font = font;
+        cell.textLabel.text = self.question;
     } else {
-        cell.textLabel.text = @"Add...";
+        if (indexPath.row < [self.choices count]) {
+            cell.textLabel.text = [self.choices objectAtIndex:indexPath.row];
+        } else {
+            cell.textLabel.text = @"Add...";
+        }
     }
     
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return NO;
+    } else {
+        if (indexPath.row < [self.choices count]) {
+            return YES;
+        } else {
+            return YES; //TODO simplify
+        }
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.choices.count) {
+        return UITableViewCellEditingStyleInsert;
+    } else {
+        return UITableViewCellEditingStyleDelete;
+    }
+}
+
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // only allow add cell to be selected
+    if (indexPath.section == 1 && indexPath.row == self.choices.count) {
+        return indexPath;
+    }
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == [self.choices count]) {
         AddChoiceController *theController = [[AddChoiceController alloc] init];
         theController.delegate = self;
+        self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
         [self.navigationController pushViewController:theController animated:YES];
         [theController release];
     }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleInsert && indexPath.row == [self.choices count]) {
+        AddChoiceController *theController = [[AddChoiceController alloc] init];
+        theController.delegate = self;
+        self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
+        [self.navigationController pushViewController:theController animated:YES];
+        [theController release];
+    } else if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.row < self.choices.count) {
+        [self.choices removeObjectAtIndex:indexPath.row];
+        if (self.choices.count == 0) {
+            self.navigationItem.rightBarButtonItem.enabled = NO;
+        }
+        [self.tableView reloadData];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat retVal = 0;
+    NSString *stringVal = nil;
+    UIFont *font = [UIFont systemFontOfSize:17];
+    if (indexPath.section == 0) {
+        stringVal = self.question;
+    } else {
+        if (indexPath.row < self.choices.count) {
+            stringVal = [self.choices objectAtIndex:indexPath.row];
+        } else {
+            stringVal = @"Add...";
+        }
+    }
+    CGSize max = CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX);
+    retVal = [stringVal sizeWithFont:font constrainedToSize:max lineBreakMode:UILineBreakModeWordWrap].height;
+    return MAX(44, retVal); // table view cell height is 44 - never want it to be smaller than that
 }
 
 # pragma mark - private implementation
@@ -116,6 +201,7 @@
 
 - (void)choiceAdded:(NSString *)choice {
     [self.choices addObject:choice];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
