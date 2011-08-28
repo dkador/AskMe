@@ -427,7 +427,7 @@
 				<integer>40</integer>
 			</dict>
 		</dict>
-		<string>AddChoiceController.m</string>
+		<string>WaitingController.m</string>
 		<dict>
 			<key>$classes</key>
 			<array>
@@ -488,7 +488,7 @@
 				<integer>49</integer>
 			</dict>
 			<key>NS.string</key>
-			<string>file://localhost/Users/dkador/dev/AskMe/AskMe/AddChoiceController.m</string>
+			<string>file://localhost/Users/dkador/dev/AskMe/AskMe/WaitingController.m</string>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -1259,25 +1259,30 @@
 			<string>{
     c =     (
                 {
-            l = "(UIInterfaceOrientation)";
-            r = "{1176, 28}";
+            l = "(NSTimeInterval)";
+            r = "{4999, 20}";
             s = 1;
         },
                 {
-            l = "(NSTimeInterval)";
-            r = "{1214, 20}";
+            l = "(NSInvocation *)";
+            r = "{5031, 20}";
+            s = 1;
+        },
+                {
+            l = "(BOOL)";
+            r = "{5060, 10}";
             s = 1;
         }
     );
-    r = "{0, 2204}";
+    r = "{0, 7845}";
     s = 0;
 }</string>
 		</dict>
-		<real>336252916.91213298</real>
+		<real>336252963.17304301</real>
 		<false/>
-		<string>{0, 2492}</string>
-		<string>{793, 0}</string>
-		<string>-loadView</string>
+		<string>{1029, 3787}</string>
+		<string>{4267, 0}</string>
+		<string>-shouldAutorotateToInterfaceOrientation:</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>
@@ -1296,7 +1301,7 @@
 				<integer>128</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/AddChoiceController.m</string>
+		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/WaitingController.m</string>
 		<dict>
 			<key>$classes</key>
 			<array>
@@ -2469,7 +2474,7 @@
 		</dict>
 		<string>IDEUtilitiesArea</string>
 		<real>260</real>
-		<string>AddChoiceController.m</string>
+		<string>WaitingController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6393,51 +6398,51 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>633</integer>
+					<integer>634</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>636</integer>
+					<integer>637</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>640</integer>
+					<integer>641</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>644</integer>
+					<integer>645</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>648</integer>
+					<integer>649</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>651</integer>
+					<integer>652</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>655</integer>
+					<integer>656</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>659</integer>
+					<integer>660</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>663</integer>
+					<integer>664</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>667</integer>
+					<integer>668</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>671</integer>
+					<integer>672</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>676</integer>
+					<integer>677</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7518,15 +7523,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>120</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
 					<integer>630</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>122</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7534,11 +7531,43 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+					<integer>122</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
 					<integer>632</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>633</integer>
 				</dict>
 			</array>
 		</dict>
-		<real>336252916.90673101</real>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>49</integer>
+			</dict>
+			<key>NS.string</key>
+			<string>{
+    c =     (
+                {
+            l = "(UIInterfaceOrientation)";
+            r = "{1176, 28}";
+            s = 1;
+        },
+                {
+            l = "(NSTimeInterval)";
+            r = "{1214, 20}";
+            s = 1;
+        }
+    );
+    r = "{0, 2204}";
+    s = 0;
+}</string>
+		</dict>
+		<real>336252943.87906599</real>
 		<string>{0, 2492}</string>
 		<string>{793, 0}</string>
 		<dict>
@@ -7570,11 +7599,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>634</integer>
+					<integer>635</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>635</integer>
+					<integer>636</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7617,11 +7646,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>637</integer>
+					<integer>638</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>638</integer>
+					<integer>639</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7629,7 +7658,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>639</integer>
+					<integer>640</integer>
 				</dict>
 			</array>
 		</dict>
@@ -7665,11 +7694,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>641</integer>
+					<integer>642</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>642</integer>
+					<integer>643</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7677,7 +7706,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>643</integer>
+					<integer>644</integer>
 				</dict>
 			</array>
 		</dict>
@@ -7713,11 +7742,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>645</integer>
+					<integer>646</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>646</integer>
+					<integer>647</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7725,7 +7754,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>647</integer>
+					<integer>648</integer>
 				</dict>
 			</array>
 		</dict>
@@ -7761,11 +7790,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>649</integer>
+					<integer>650</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>650</integer>
+					<integer>651</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7808,11 +7837,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>652</integer>
+					<integer>653</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>653</integer>
+					<integer>654</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7820,7 +7849,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>654</integer>
+					<integer>655</integer>
 				</dict>
 			</array>
 		</dict>
@@ -7856,11 +7885,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>656</integer>
+					<integer>657</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>657</integer>
+					<integer>658</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7868,7 +7897,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>658</integer>
+					<integer>659</integer>
 				</dict>
 			</array>
 		</dict>
@@ -7904,11 +7933,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>660</integer>
+					<integer>661</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>661</integer>
+					<integer>662</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7916,7 +7945,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>662</integer>
+					<integer>663</integer>
 				</dict>
 			</array>
 		</dict>
@@ -7952,11 +7981,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>664</integer>
+					<integer>665</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>665</integer>
+					<integer>666</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -7964,7 +7993,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>666</integer>
+					<integer>667</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8000,11 +8029,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>668</integer>
+					<integer>669</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>669</integer>
+					<integer>670</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -8012,7 +8041,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>670</integer>
+					<integer>671</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8052,15 +8081,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>672</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
 					<integer>673</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>122</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -8068,7 +8089,15 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+					<integer>122</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
 					<integer>675</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>676</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8091,7 +8120,7 @@
     s = 0;
 }</string>
 		</dict>
-		<real>336252570.40940601</real>
+		<real>336252941.345487</real>
 		<string>{0, 2638}</string>
 		<string>{1288, 0}</string>
 		<dict>
@@ -8127,7 +8156,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>677</integer>
+					<integer>120</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -8147,38 +8176,9 @@
 				</dict>
 			</array>
 		</dict>
-		<dict>
-			<key>$class</key>
-			<dict>
-				<key>CF$UID</key>
-				<integer>49</integer>
-			</dict>
-			<key>NS.string</key>
-			<string>{
-    c =     (
-                {
-            l = "(NSTimeInterval)";
-            r = "{4999, 20}";
-            s = 1;
-        },
-                {
-            l = "(NSInvocation *)";
-            r = "{5031, 20}";
-            s = 1;
-        },
-                {
-            l = "(BOOL)";
-            r = "{5060, 10}";
-            s = 1;
-        }
-    );
-    r = "{0, 7845}";
-    s = 0;
-}</string>
-		</dict>
-		<real>336252911.89257401</real>
-		<string>{3525, 3122}</string>
-		<string>{5248, 0}</string>
+		<real>336252963.16995299</real>
+		<string>{1029, 3787}</string>
+		<string>{4267, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10162,7 +10162,7 @@
 				<integer>833</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>336252800.71947902</real>
+			<real>336252959.32413399</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -10173,7 +10173,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 3:33 PM</string>
+		<string>Today at 3:35 PM</string>
 		<integer>234</integer>
 		<dict>
 			<key>$class</key>
@@ -10385,7 +10385,7 @@
 				<integer>852</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/AddChoiceController.m</string>
+		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/WaitingController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10403,7 +10403,7 @@
 				<integer>854</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/WaitingController.m</string>
+		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/AddChoiceController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10421,7 +10421,7 @@
 				<integer>856</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/QuestionController.m</string>
+		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/ChoicesController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10439,7 +10439,7 @@
 				<integer>858</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/AddChoiceController.h</string>
+		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/QuestionController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10457,7 +10457,7 @@
 				<integer>860</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/ChoicesController.m</string>
+		<string>file://localhost/Users/dkador/dev/AskMe/AskMe/AddChoiceController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
