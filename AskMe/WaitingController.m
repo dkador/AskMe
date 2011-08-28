@@ -22,17 +22,16 @@
 NSString * const ServerAddress = @"http://askme.herokuapp.com";
 
 @synthesize question=question_;
+@synthesize answer=answer_;
 @synthesize choices=choices_;
 @synthesize questionId=questionId_;
 @synthesize questionAlreadyCreated=questionAlreadyCreated_;
 @synthesize refreshTimer=refreshTimer_;
 
-@synthesize questionLabel=questionLabel_;
-@synthesize answerTextView=answerTextView_;
-
 - (id) initWithQuestion: (NSString *) question AndChoices: (NSArray *) choices {
-    if (self = [super init]) {
+    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
         self.question = question;
+        self.answer = @"Waiting for answer";
         self.choices = choices;
     }
     return self;
@@ -40,6 +39,7 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
 
 - (void)dealloc {
     [question_ release];
+    [answer_ release];
     [choices_ release];
     [questionId_ release];
     [refreshTimer_ release];
@@ -48,47 +48,14 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
 
 #pragma mark - View lifecycle
 
-- (void)loadView {
-    UIView *theView = [[UIView alloc] init];
-    self.view = theView;
-    [theView release];    
-    
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+- (void)viewDidLoad { 
+    [super viewDidLoad];
     
     self.navigationItem.title = @"Waiting...";
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
     self.navigationItem.rightBarButtonItem = item;
     [item release];
-    
-    UILabel *questionLabel = [[UILabel alloc] init];
-    questionLabel.frame = CGRectMake(10, 10, 300, 44);
-    questionLabel.backgroundColor = [UIColor clearColor];
-    questionLabel.textAlignment = UITextAlignmentCenter;
-    questionLabel.text = self.question;
-    [self.view addSubview:questionLabel];
-    self.questionLabel = questionLabel;
-    [questionLabel release];
-    
-    UITextView *textView = [[UITextView alloc] init];
-    textView.frame = CGRectMake(10, 60, 300, 200);
-    textView.layer.cornerRadius = 8;
-    textView.editable = NO;
-    textView.text = @"Waiting for answer...";
-    textView.font = [UIFont systemFontOfSize:20];
-    [self.view addSubview:textView];
-    self.answerTextView = textView;
-    [textView release];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(10, 300, 150, 44);
-    [button setTitle:@"Ask a new question" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(startOver) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-}
-
-- (void)viewDidLoad { 
-    [super viewDidLoad];
     
     if (!self.questionAlreadyCreated) {
         NSURL *url = [NSURL URLWithString:[ServerAddress stringByAppendingString:@"/questions.json"]];
@@ -144,21 +111,91 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
     }
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    self.answerTextView = nil;
-    self.questionLabel = nil;
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [self.refreshTimer invalidate];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3; // 1 for orig question, 1 for answer, 1 for starting over
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Your Question";
+    } else if (section == 1) {
+        return @"The Answer";
+    } else {
+        return @"Start Over";
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        cell.textLabel.numberOfLines = 0;
+    }
+    
+    // Configure the cell...
+    if (indexPath.section == 0) {
+        cell.textLabel.text = self.question;
+    } else if (indexPath.section == 1) {
+        cell.textLabel.text = self.answer;
+    } else {
+        cell.textLabel.text = @"Ask a new question";
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    }     
+    
+    return cell;
+}
+
+#pragma mark - Table view delegate
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // only allow start over cell to be selected
+    if (indexPath.section == 2) {
+        return indexPath;
+    }
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        [self startOver];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat retVal = 0;
+    NSString *stringVal = nil;
+    UIFont *font = [UIFont systemFontOfSize:17];
+    if (indexPath.section == 0) {
+        stringVal = self.question;
+    } else if (indexPath.section == 1) {
+        stringVal = self.answer;
+    } else {
+        stringVal = @"Ask a new question";
+    }
+    CGSize max = CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX);
+    retVal = [stringVal sizeWithFont:font constrainedToSize:max lineBreakMode:UILineBreakModeWordWrap].height;
+    return MAX(44, retVal); // table view cell height is 44 - never want it to be smaller than that
+}
+
+# pragma mark - impl
 
 - (void) refresh {
     if (self.questionId) {
@@ -172,7 +209,7 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
             NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
             NSLog(@"RESPONSE %@", dict);
             NSDictionary *question = [dict objectForKey:@"question"];
-            self.questionLabel.text = [question objectForKey:@"body"];
+            self.question = [question objectForKey:@"body"];
             NSDictionary *answer = [question objectForKey:@"answer"];
             if (answer) {
                 NSLog(@"has answer");
@@ -180,17 +217,18 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
                 self.navigationItem.title = @"Answered!";
                 id otherText = [answer objectForKey:@"other_text"];
                 if (otherText != [NSNull null] && ![otherText isEqualToString:@""]) {
-                    self.answerTextView.text = otherText;
+                    self.answer = otherText;
                 } else {
                     NSNumber *choiceId = [answer objectForKey:@"choice_id"];
                     NSArray *choices = [question objectForKey:@"choices"];
                     for (NSDictionary *choice in choices) {
                         if ([choiceId isEqualToNumber:[choice objectForKey:@"id"]]) {
                             NSLog(@"found our choice %@", choice);
-                            self.answerTextView.text = [choice objectForKey:@"body"];                            
+                            self.answer = [choice objectForKey:@"body"];
                         }
                     }
                 }
+                [self.tableView reloadData];
             }
         }];
         [request setFailedBlock:^{
@@ -202,7 +240,7 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
 
 - (void) setupTimer {
     if (!self.refreshTimer || !self.refreshTimer.isValid) {        
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
         self.refreshTimer = timer;        
     }
 }

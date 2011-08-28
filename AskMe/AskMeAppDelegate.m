@@ -35,7 +35,7 @@
     NSNumber *currentQuestionId = [Util currentQuestionId];
     if (currentQuestionId) {
         // go straight to it.
-        WaitingController *waitingController = [[WaitingController alloc] init];
+        WaitingController *waitingController = [[WaitingController alloc] initWithQuestion:nil AndChoices:nil];
         waitingController.questionAlreadyCreated = YES;
         waitingController.questionId = currentQuestionId;
         [self.viewController pushViewController:waitingController animated:NO];

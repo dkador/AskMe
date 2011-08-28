@@ -8,21 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WaitingController : UIViewController {
+@interface WaitingController : UITableViewController {
     
 }
 
 @property (nonatomic, retain) NSString *question;
+@property (nonatomic, retain) NSString *answer;
 @property (nonatomic, retain) NSArray *choices;
 @property (nonatomic, retain) NSNumber *questionId;
 @property (nonatomic) Boolean questionAlreadyCreated;
 @property (nonatomic, retain) NSTimer *refreshTimer;
 
-@property (nonatomic, retain) UILabel *questionLabel;
-@property (nonatomic, retain) UITextView *answerTextView;
-
 - (id) initWithQuestion: (NSString *) question AndChoices: (NSArray *) choices;
 - (void) refresh;
 - (void) setupTimer;
+- (void) startOver;
 
 @end

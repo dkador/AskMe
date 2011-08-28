@@ -21,8 +21,7 @@
 
 @synthesize question=question_, choices=choices_;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -31,8 +30,7 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [question_ release];
     [choices_ release];
     [super dealloc];
@@ -40,8 +38,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"New Choices";
@@ -55,23 +52,18 @@
     self.tableView.allowsSelectionDuringEditing = YES;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2; // 1 for orig question, 1 for choices
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
     } else {
@@ -87,8 +79,7 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -100,8 +91,6 @@
     
     // Configure the cell...
     if (indexPath.section == 0) {
-        UIFont *font = [UIFont systemFontOfSize:16];
-        cell.textLabel.font = font;
         cell.textLabel.text = self.question;
     } else {
         if (indexPath.row < [self.choices count]) {
@@ -118,19 +107,23 @@
     if (indexPath.section == 0) {
         return NO;
     } else {
-        if (indexPath.row < [self.choices count]) {
-            return YES;
-        } else {
-            return YES; //TODO simplify
-        }
+        return YES;
     }
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.choices.count) {
-        return UITableViewCellEditingStyleInsert;
-    } else {
-        return UITableViewCellEditingStyleDelete;
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleInsert && indexPath.row == [self.choices count]) {
+        AddChoiceController *theController = [[AddChoiceController alloc] init];
+        theController.delegate = self;
+        self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
+        [self.navigationController pushViewController:theController animated:YES];
+        [theController release];
+    } else if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.row < self.choices.count) {
+        [self.choices removeObjectAtIndex:indexPath.row];
+        if (self.choices.count == 0) {
+            self.navigationItem.rightBarButtonItem.enabled = NO;
+        }
+        [self.tableView reloadData];
     }
 }
 
@@ -154,22 +147,6 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleInsert && indexPath.row == [self.choices count]) {
-        AddChoiceController *theController = [[AddChoiceController alloc] init];
-        theController.delegate = self;
-        self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
-        [self.navigationController pushViewController:theController animated:YES];
-        [theController release];
-    } else if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.row < self.choices.count) {
-        [self.choices removeObjectAtIndex:indexPath.row];
-        if (self.choices.count == 0) {
-            self.navigationItem.rightBarButtonItem.enabled = NO;
-        }
-        [self.tableView reloadData];
-    }
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat retVal = 0;
     NSString *stringVal = nil;
@@ -186,6 +163,14 @@
     CGSize max = CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX);
     retVal = [stringVal sizeWithFont:font constrainedToSize:max lineBreakMode:UILineBreakModeWordWrap].height;
     return MAX(44, retVal); // table view cell height is 44 - never want it to be smaller than that
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.choices.count) {
+        return UITableViewCellEditingStyleInsert;
+    } else {
+        return UITableViewCellEditingStyleDelete;
+    }
 }
 
 # pragma mark - private implementation
