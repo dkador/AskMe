@@ -18,8 +18,11 @@
 
 @implementation WaitingController
 
-NSString * const ServerAddress = @"http://192.168.1.50:3000";
-//NSString * const ServerAddress = @"http://askme.herokuapp.com";
+//NSString * const ServerHost = @"192.168.1.50";
+//NSString * const ServerAddress = @"http://192.168.1.50:3000";
+
+NSString * const ServerHost = @"askme.herokuapp.com";
+NSString * const ServerAddress = @"http://askme.herokuapp.com";
 
 @synthesize question=question_;
 @synthesize answer=answer_;

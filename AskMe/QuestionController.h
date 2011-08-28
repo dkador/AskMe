@@ -10,7 +10,6 @@
 
 
 @interface QuestionController : UIViewController <UITextViewDelegate> {
-    UITextView *questionTextView;
 }
 
 @property (nonatomic, retain) UITextView *questionTextView;

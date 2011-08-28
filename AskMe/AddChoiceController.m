@@ -37,14 +37,14 @@
     
     self.navigationItem.title = @"Add a choice";
                 
-    UITextView *theField = [[UITextView alloc] init];
-    theField.delegate = self;
-    theField.font = [UIFont systemFontOfSize:16];
-    [self.view addSubview:theField];
-    [theField becomeFirstResponder];
-    self.textView = theField;
+    UITextView *theTextView = [[UITextView alloc] init];
+    theTextView.delegate = self;
+    theTextView.font = [UIFont systemFontOfSize:16];
+    [self.view addSubview:theTextView];
+    [theTextView becomeFirstResponder];
+    self.textView = theTextView;
     [self willRotateToInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation duration:NSTimeIntervalSince1970];
-    [theField release];
+    [theTextView release];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(done)];
     [doneButton setEnabled:NO];

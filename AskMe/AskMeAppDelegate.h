@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NetCheck.h"
 
 
-@interface AskMeAppDelegate : NSObject <UIApplicationDelegate> {
+@interface AskMeAppDelegate : NSObject <UIApplicationDelegate, NetCheckDelegate> {
 
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UINavigationController *viewController;
+
+@property (nonatomic, assign) id<NetCheckDelegate> delegate;
 
 @end

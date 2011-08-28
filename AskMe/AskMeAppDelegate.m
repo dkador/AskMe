@@ -19,6 +19,8 @@
 
 @synthesize viewController=_viewController;
 
+@synthesize delegate;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     id remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -79,13 +81,25 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];  
+    NetCheck *netCheck = [[NetCheck alloc] init];
+    netCheck.delegate = self;
+    [netCheck checkReachabilityForHost:ServerHost];
 }
 
 - (void)dealloc {
     [_window release];
     [_viewController release];
+    self.delegate = nil;
     [super dealloc];
+}
+
+# pragma mark - NetCheckDelegate
+
+- (void)reachabilityFinishedWithInternetReachable:(Boolean)internetReachable HostReachable:(Boolean)hostReachable {
+    if (!(internetReachable && hostReachable)) {
+        [Util showErrorWithText:@"It seems your device has no internet connection. This app likely will not work." AndTitle:@"Hold It!"];
+    }
 }
 
 @end

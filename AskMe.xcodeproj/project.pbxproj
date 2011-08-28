@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0142C9B7140ADBA00026CDFC /* NetCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0142C9B6140ADBA00026CDFC /* NetCheck.m */; };
 		016A239513BFBE6F00A605E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239413BFBE6F00A605E4 /* UIKit.framework */; };
 		016A239713BFBE6F00A605E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239613BFBE6F00A605E4 /* Foundation.framework */; };
 		016A239913BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239813BFBE6F00A605E4 /* CoreGraphics.framework */; };
@@ -59,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0142C9B5140ADBA00026CDFC /* NetCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetCheck.h; path = ext/NetCheck/NetCheck.h; sourceTree = "<group>"; };
+		0142C9B6140ADBA00026CDFC /* NetCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetCheck.m; path = ext/NetCheck/NetCheck.m; sourceTree = "<group>"; };
 		016A239013BFBE6F00A605E4 /* AskMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AskMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016A239413BFBE6F00A605E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		016A239613BFBE6F00A605E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -158,6 +161,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0142C9AE140ADB090026CDFC /* NetCheck */ = {
+			isa = PBXGroup;
+			children = (
+				0142C9B5140ADBA00026CDFC /* NetCheck.h */,
+				0142C9B6140ADBA00026CDFC /* NetCheck.m */,
+			);
+			name = NetCheck;
+			sourceTree = "<group>";
+		};
 		016A238513BFBE6F00A605E4 = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +262,7 @@
 		016BA18013F7773D008A9C12 /* Ext */ = {
 			isa = PBXGroup;
 			children = (
+				0142C9AE140ADB090026CDFC /* NetCheck */,
 				016BA19813F777C0008A9C12 /* asi-http-request */,
 				016BA19713F777B4008A9C12 /* TouchJSON */,
 			);
@@ -463,6 +476,7 @@
 				016BA1B813F77884008A9C12 /* Reachability.m in Sources */,
 				016BA1C413F77963008A9C12 /* WaitingController.m in Sources */,
 				016BA1CF13F8C76F008A9C12 /* Util.m in Sources */,
+				0142C9B7140ADBA00026CDFC /* NetCheck.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
