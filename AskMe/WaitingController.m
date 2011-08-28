@@ -18,8 +18,8 @@
 
 @implementation WaitingController
 
-//NSString * const ServerAddress = @"http://192.168.1.50:3000";
-NSString * const ServerAddress = @"http://askme.herokuapp.com";
+NSString * const ServerAddress = @"http://192.168.1.50:3000";
+//NSString * const ServerAddress = @"http://askme.herokuapp.com";
 
 @synthesize question=question_;
 @synthesize answer=answer_;
@@ -76,33 +76,41 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
         [questionDict setObject:choicesArray forKey:@"choices"];
         [requestDict setObject:questionDict forKey:@"question"];
         NSError *error = nil;
-        //TODO error
         NSData *jsonData = [[CJSONSerializer serializer] serializeDictionary:requestDict error:&error];
+        if (error) {
+            NSLog(@"An error occurred during serialization: %@", [error localizedDescription]);
+            [Util showErrorWithText:@"Could not create JSON request for your question!" AndTitle:@"Aw, Shucks"];
+        }
         [request appendPostData:jsonData];
         [request setRequestMethod:@"POST"];
         request.requestHeaders = [NSMutableDictionary dictionaryWithObject:@"application/json" forKey:@"Content-Type"];
         
         [request setCompletionBlock:^{  
             if (request.responseStatusCode == 201) {
-                NSLog(@"THAT FUCKER GOT CREATED");
                 NSData *jsonData = [request responseData];
                 NSError *error = nil;
-                //TODO errors
                 NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
-                NSLog(@"RESPONSE %@", dict);
+                if (error) {
+                    NSLog(@"An error occurred during deserialization: %@", [error localizedDescription]);
+                    [Util showErrorWithText:@"Could not deserialize HTTP response!" AndTitle:@"Gee Whiz"];
+                }
                 NSNumber *theId = [[dict objectForKey:@"question"] objectForKey:@"id"];
-                NSLog(@"the id %@", theId);
                 [Util setCurrentQuestionId:theId];
                 self.questionId = theId;
                 [self setupTimer];
             } else {
                 NSLog(@"something bad happened");
+                NSLog(@"An error occurred during question creation.");
+                NSLog(@"Response status code: %i", request.responseStatusCode);
+                NSLog(@"Response status message: %@", request.responseStatusMessage);
+                NSLog(@"Response: %@", request.responseString);
+                [Util showErrorWithText:@"Error sending question to server!" AndTitle:@"C'mon!"];
             }
         }];
         [request setFailedBlock:^{
-            //TODO
             NSError *error = [request error];
             NSLog(@"question create failed %@", [error localizedDescription]);
+            [Util showErrorWithText:@"Error sending question to server!" AndTitle:@"Golly!"];
         }];
         
         [request startAsynchronous];
@@ -201,37 +209,41 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/%@.json", ServerAddress, self.questionId]];
         ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];   
         [request setCompletionBlock:^{
-            NSLog(@"refresh succeeded");
             NSData *jsonData = [request responseData];
             NSError *error = nil;
-            //TODO errors
             NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
-            NSLog(@"RESPONSE %@", dict);
+            if (error) {
+                NSLog(@"An error occurred during question status deserialization: %@", [error localizedDescription]);
+                [Util showErrorWithText:@"Error getting answer from server!" AndTitle:@"Weak"];
+            }
             NSDictionary *question = [dict objectForKey:@"question"];
             self.question = [question objectForKey:@"body"];
             NSDictionary *answer = [question objectForKey:@"answer"];
             if (answer) {
-                NSLog(@"has answer");
                 [self.refreshTimer invalidate];
                 self.navigationItem.title = @"Answered!";
-                id otherText = [answer objectForKey:@"other_text"];
-                if (otherText != [NSNull null] && ![otherText isEqualToString:@""]) {
-                    self.answer = otherText;
-                } else {
-                    NSNumber *choiceId = [answer objectForKey:@"choice_id"];
+                
+                id choiceId = [answer objectForKey:@"choice_id"];
+                if (choiceId != [NSNull null]) {
                     NSArray *choices = [question objectForKey:@"choices"];
                     for (NSDictionary *choice in choices) {
                         if ([choiceId isEqualToNumber:[choice objectForKey:@"id"]]) {
-                            NSLog(@"found our choice %@", choice);
                             self.answer = [choice objectForKey:@"body"];
                         }
+                    }                    
+                } else {
+                    id otherText = [answer objectForKey:@"other_text"];
+                    if (otherText == [NSNull null]) {
+                        otherText = @"";
                     }
+                    self.answer = otherText;
                 }
                 [self.tableView reloadData];
             }
         }];
         [request setFailedBlock:^{
-            NSLog(@"refresh failed");
+            NSLog(@"Refresh failed: %@", request.error.localizedDescription);
+            [Util showErrorWithText:@"Error getting answer from server!" AndTitle:@"Bogus"];
         }];
         [request startAsynchronous];
     }
