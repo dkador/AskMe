@@ -78,8 +78,11 @@
     }
 }
 
-- (void)dealloc
-{
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];    
+}
+
+- (void)dealloc {
     [_window release];
     [_viewController release];
     [super dealloc];
