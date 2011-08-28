@@ -11,10 +11,11 @@
 
 @protocol AddChoiceControllerDelegate;
 
-@interface AddChoiceController : UIViewController <UITextFieldDelegate> {
+@interface AddChoiceController : UIViewController <UITextViewDelegate> {
 }
 
 @property (assign, nonatomic) id<AddChoiceControllerDelegate> delegate;
+@property (nonatomic, retain) UITextView *textView;
 
 @end
 

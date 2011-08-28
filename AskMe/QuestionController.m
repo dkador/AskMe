@@ -61,7 +61,7 @@
     [self setQuestionTextView:theTextView];
     [theTextView release];
     [[self questionTextView] setDelegate:self];
-    [[self questionTextView] setFont:[UIFont systemFontOfSize:14]];
+    [[self questionTextView] setFont:[UIFont systemFontOfSize:16]];
     [[self view] addSubview:[self questionTextView]];
     [[self questionTextView] becomeFirstResponder];
     self.questionTextView.clipsToBounds = YES;
@@ -70,9 +70,6 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     self.navigationItem.title = @"New Question";
-}
-
-- (void)viewWillAppear:(BOOL)animated {
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
