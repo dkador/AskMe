@@ -95,7 +95,6 @@
 # pragma mark - private impl
 
 - (void)nextSelected {
-    NSLog(@"next selected");
     ChoicesController *choicesController = [[ChoicesController alloc] initWithStyle:UITableViewStyleGrouped];
     [choicesController setQuestion:[[self questionTextView] text]];
     self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];

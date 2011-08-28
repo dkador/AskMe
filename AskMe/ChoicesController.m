@@ -175,7 +175,6 @@
 # pragma mark - private implementation
 
 - (void) addSelected {
-    NSLog(@"addSelected");
     WaitingController *controller = [[WaitingController alloc] initWithQuestion:self.question AndChoices:self.choices];
     [self.navigationController pushViewController:controller animated:YES];
     [controller release];
