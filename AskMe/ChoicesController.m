@@ -159,7 +159,7 @@
             stringVal = @"Add...";
         }
     }
-    CGSize max = CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX);
+    CGSize max = CGSizeMake([Util getCurrentDeviceWidth] - 20, CGFLOAT_MAX);
     retVal = [stringVal sizeWithFont:font constrainedToSize:max lineBreakMode:UILineBreakModeWordWrap].height;
     return MAX(44, retVal); // table view cell height is 44 - never want it to be smaller than that
 }

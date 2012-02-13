@@ -54,20 +54,38 @@ NSString * const CurrentQuestionId = @"CurrentQuestionIdKey";
 }
 
 + (uint) getCurrentDeviceWidth {
+    BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
     switch ([[UIDevice currentDevice] userInterfaceIdiom]) {
         case UIUserInterfaceIdiomPad:
-            return 768;
+            if (isPortrait) {
+                return 768;
+            } else {
+                return 1024;
+            }
         default:
-            return 320;
+            if (isPortrait) {
+                return 320;
+            } else {
+                return 480;
+            }
     }
 }
 
 + (uint) getCurrentDeviceHeight {
+    BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
     switch ([[UIDevice currentDevice] userInterfaceIdiom]) {
         case UIUserInterfaceIdiomPad:
-            return 1024;
+            if (isPortrait) {
+                return 1024;
+            } else {
+                return 768;
+            }
         default:
-            return 480;
+            if (isPortrait) {
+                return 480;
+            } else {
+                return 320;
+            }
     }
 }
 

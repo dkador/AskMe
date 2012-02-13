@@ -77,17 +77,15 @@
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    CGFloat height;
-    CGFloat width;
+    CGFloat height = [Util getCurrentDeviceHeight] - 20;
+    CGFloat width = [Util getCurrentDeviceWidth];
     // status bar and navigation bar
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-        height = [Util getCurrentDeviceWidth] - 20 - 32;
+        height -= 32;
         height -= 162;
-        width = [Util getCurrentDeviceHeight];
     } else {
-        height = [Util getCurrentDeviceHeight] - 20 - 44;
-        height -= 216;        
-        width = [Util getCurrentDeviceWidth];
+        height -= 44;
+        height -= 216;    
     }
     self.questionTextView.frame = CGRectMake(0, 0, width, height);
 }
