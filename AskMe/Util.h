@@ -24,8 +24,8 @@
 
 + (uint) getCurrentDeviceWidth;
 + (uint) getCurrentDeviceHeight;
-+ (uint) currentDeviceWidthForOrientation: (UIInterfaceOrientation) orientation;
-+ (uint) currentDeviceHeightForOrientation: (UIInterfaceOrientation) orientation;
++ (uint) deviceWidthForOrientation: (UIInterfaceOrientation) orientation;
++ (uint) deviceHeightForOrientation: (UIInterfaceOrientation) orientation;
 
 + (NSString *) UUIDForDevice;
 

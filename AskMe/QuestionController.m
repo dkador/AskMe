@@ -66,6 +66,9 @@
     [[self view] addSubview:[self questionTextView]];
     [[self questionTextView] becomeFirstResponder];
     self.questionTextView.clipsToBounds = YES;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
     [self willRotateToInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation duration:NSTimeIntervalSince1970];
 }
 
@@ -78,8 +81,8 @@
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    CGFloat height = [Util currentDeviceHeightForOrientation:toInterfaceOrientation] - 20;
-    CGFloat width = [Util currentDeviceWidthForOrientation:toInterfaceOrientation];
+    CGFloat height = [Util deviceHeightForOrientation:toInterfaceOrientation] - 20;
+    CGFloat width = [Util deviceWidthForOrientation:toInterfaceOrientation];
     // status bar and navigation bar
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
         height -= 32;

@@ -56,15 +56,15 @@ NSString * const UUIDKey = @"UUIDKey";
 
 + (uint) getCurrentDeviceWidth {
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    return [self currentDeviceWidthForOrientation:orientation];
+    return [self deviceWidthForOrientation:orientation];
 }
 
 + (uint) getCurrentDeviceHeight {
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    return [self currentDeviceHeightForOrientation:orientation];
+    return [self deviceHeightForOrientation:orientation];
 }
 
-+ (uint) currentDeviceWidthForOrientation: (UIInterfaceOrientation) orientation {
++ (uint) deviceWidthForOrientation: (UIInterfaceOrientation) orientation {
     BOOL isPortrait = UIInterfaceOrientationIsPortrait(orientation);
     switch ([[UIDevice currentDevice] userInterfaceIdiom]) {
         case UIUserInterfaceIdiomPad:
@@ -82,7 +82,7 @@ NSString * const UUIDKey = @"UUIDKey";
     }
 }
 
-+ (uint) currentDeviceHeightForOrientation: (UIInterfaceOrientation) orientation {
++ (uint) deviceHeightForOrientation: (UIInterfaceOrientation) orientation {
     BOOL isPortrait = UIInterfaceOrientationIsPortrait(orientation);
     switch ([[UIDevice currentDevice] userInterfaceIdiom]) {
         case UIUserInterfaceIdiomPad:

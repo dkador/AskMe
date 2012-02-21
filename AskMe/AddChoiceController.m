@@ -57,8 +57,8 @@
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    CGFloat height = [Util getCurrentDeviceHeight] - 20;
-    CGFloat width = [Util getCurrentDeviceWidth];
+    CGFloat height = [Util deviceHeightForOrientation:toInterfaceOrientation] - 20;
+    CGFloat width = [Util deviceWidthForOrientation:toInterfaceOrientation];
     // status bar and navigation bar
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
         height -= 32;
