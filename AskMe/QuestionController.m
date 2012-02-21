@@ -9,6 +9,7 @@
 #import "QuestionController.h"
 #import "ChoicesController.h"
 #import "Util.h"
+#import "KeenClient.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -77,8 +78,8 @@
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    CGFloat height = [Util getCurrentDeviceHeight] - 20;
-    CGFloat width = [Util getCurrentDeviceWidth];
+    CGFloat height = [Util currentDeviceHeightForOrientation:toInterfaceOrientation] - 20;
+    CGFloat width = [Util currentDeviceWidthForOrientation:toInterfaceOrientation];
     // status bar and navigation bar
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
         height -= 32;
@@ -93,6 +94,9 @@
 # pragma mark - private impl
 
 - (void)nextSelected {
+    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user", @"entered question", @"name", nil];
+    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    
     ChoicesController *choicesController = [[ChoicesController alloc] initWithStyle:UITableViewStyleGrouped];
     [choicesController setQuestion:[[self questionTextView] text]];
     self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];

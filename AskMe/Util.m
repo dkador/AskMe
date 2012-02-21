@@ -12,6 +12,7 @@
 
 NSString * const DeviceTokenKey = @"DeviceToken";
 NSString * const CurrentQuestionId = @"CurrentQuestionIdKey";
+NSString * const UUIDKey = @"UUIDKey";
 
 + (void) showErrorWithText: (NSString *) errorText AndTitle: (NSString *) title {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:errorText delegate:nil cancelButtonTitle:@"Oops" otherButtonTitles:nil];
@@ -54,7 +55,17 @@ NSString * const CurrentQuestionId = @"CurrentQuestionIdKey";
 }
 
 + (uint) getCurrentDeviceWidth {
-    BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    return [self currentDeviceWidthForOrientation:orientation];
+}
+
++ (uint) getCurrentDeviceHeight {
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    return [self currentDeviceHeightForOrientation:orientation];
+}
+
++ (uint) currentDeviceWidthForOrientation: (UIInterfaceOrientation) orientation {
+    BOOL isPortrait = UIInterfaceOrientationIsPortrait(orientation);
     switch ([[UIDevice currentDevice] userInterfaceIdiom]) {
         case UIUserInterfaceIdiomPad:
             if (isPortrait) {
@@ -71,8 +82,8 @@ NSString * const CurrentQuestionId = @"CurrentQuestionIdKey";
     }
 }
 
-+ (uint) getCurrentDeviceHeight {
-    BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
++ (uint) currentDeviceHeightForOrientation: (UIInterfaceOrientation) orientation {
+    BOOL isPortrait = UIInterfaceOrientationIsPortrait(orientation);
     switch ([[UIDevice currentDevice] userInterfaceIdiom]) {
         case UIUserInterfaceIdiomPad:
             if (isPortrait) {
@@ -87,6 +98,20 @@ NSString * const CurrentQuestionId = @"CurrentQuestionIdKey";
                 return 320;
             }
     }
+}
+
++ (NSString *) UUIDForDevice {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *uuid = [defaults valueForKey:UUIDKey];
+    if (!uuid) {
+        // create a unique id specific to this app
+        CFUUIDRef ref = CFUUIDCreate(kCFAllocatorDefault);
+        CFStringRef UUIDSRef = CFUUIDCreateString(kCFAllocatorDefault, ref);
+        uuid = [NSString stringWithFormat:@"%@", UUIDSRef];
+        [defaults setValue:uuid forKey:UUIDKey];
+        [defaults synchronize];
+    }
+    return uuid;    
 }
 
 @end

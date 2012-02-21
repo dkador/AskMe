@@ -9,6 +9,7 @@
 #import "ChoicesController.h"
 #import "WaitingController.h"
 #import "Util.h"
+#import "KeenClient.h"
 
 
 @interface ChoicesController()
@@ -178,6 +179,11 @@
     WaitingController *controller = [[WaitingController alloc] initWithQuestion:self.question AndChoices:self.choices];
     [self.navigationController pushViewController:controller animated:YES];
     [controller release];
+    
+    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user",
+                           @"questions and choices finished", @"name", 
+                           [NSNumber numberWithInt:self.choices.count], @"number", nil];
+    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
 }
 
 # pragma mark - AddChoiceControllerDelegate impl
@@ -187,6 +193,11 @@
     self.navigationItem.rightBarButtonItem.enabled = YES;
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user", 
+                           @"choice added", @"name", 
+                           [NSNumber numberWithInt:self.choices.count], @"number", nil];
+    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
 }
 
 @end

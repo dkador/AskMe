@@ -10,6 +10,7 @@
 #import "QuestionController.h"
 #import "WaitingController.h"
 #import "Util.h"
+#import "KeenClient.h"
 
 
 @implementation AskMeAppDelegate
@@ -21,7 +22,7 @@
 
 @synthesize delegate;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {   
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     id remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     NSLog(@"remote: %@", remoteNotification);
@@ -49,7 +50,24 @@
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
+    [KeenClient clientForProject:@"abc" andAuthToken:@"123"];
+    
+    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"app launched", @"name", [Util UUIDForDevice], @"user", nil];
+    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    
     return YES;
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    UIBackgroundTaskIdentifier taskId = [application beginBackgroundTaskWithExpirationHandler:^(void) {
+        
+    }];
+    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"app closed", @"name", [Util UUIDForDevice], @"user", nil];
+    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    [[KeenClient lastRequestedClient] uploadWithFinishedBlock:^(void){
+        NSLog(@"Upload finished, ending background thread.");
+        [application endBackgroundTask:taskId];
+    }];
 }
 
 // Delegation methods

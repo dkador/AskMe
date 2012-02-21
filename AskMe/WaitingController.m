@@ -12,6 +12,7 @@
 #import "CJSONSerializer.h"
 #import "CJSONDeserializer.h"
 #import "Util.h"
+#import "KeenClient.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -260,6 +261,16 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
 }
 
 - (void) startOver {
+    NSDictionary *event = nil;
+    if (self.refreshTimer.isValid) {
+        event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user", 
+                 @"asked new question before old one was answered", @"name", nil];
+    } else {
+        event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user", 
+                 @"asked new question after old one was answered", @"name", nil];
+    }
+    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    
     [self.refreshTimer invalidate];
     [Util removeCurrentQuestionId];
     QuestionController *controller = (QuestionController *) [self.navigationController.viewControllers objectAtIndex:0];
