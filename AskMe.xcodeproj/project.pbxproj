@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0142C9B7140ADBA00026CDFC /* NetCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0142C9B6140ADBA00026CDFC /* NetCheck.m */; };
-		01467C8A14F2F4DE0001C4B6 /* libKeenClient-Aggregate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01467C8814F2F4DE0001C4B6 /* libKeenClient-Aggregate.a */; };
+		014315B214F4B174001FF907 /* libKeenClient-Aggregate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 014315B114F4B174001FF907 /* libKeenClient-Aggregate.a */; };
 		016A239513BFBE6F00A605E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239413BFBE6F00A605E4 /* UIKit.framework */; };
 		016A239713BFBE6F00A605E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239613BFBE6F00A605E4 /* Foundation.framework */; };
 		016A239913BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239813BFBE6F00A605E4 /* CoreGraphics.framework */; };
@@ -63,7 +63,7 @@
 /* Begin PBXFileReference section */
 		0142C9B5140ADBA00026CDFC /* NetCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetCheck.h; path = ext/NetCheck/NetCheck.h; sourceTree = "<group>"; };
 		0142C9B6140ADBA00026CDFC /* NetCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetCheck.m; path = ext/NetCheck/NetCheck.m; sourceTree = "<group>"; };
-		01467C8814F2F4DE0001C4B6 /* libKeenClient-Aggregate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKeenClient-Aggregate.a"; sourceTree = "<group>"; };
+		014315B114F4B174001FF907 /* libKeenClient-Aggregate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKeenClient-Aggregate.a"; sourceTree = "<group>"; };
 		01467C8914F2F4DE0001C4B6 /* KeenClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeenClient.h; sourceTree = "<group>"; };
 		016A239013BFBE6F00A605E4 /* AskMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AskMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016A239413BFBE6F00A605E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -149,7 +149,7 @@
 				016BA1BA13F778A6008A9C12 /* CFNetwork.framework in Frameworks */,
 				016A239513BFBE6F00A605E4 /* UIKit.framework in Frameworks */,
 				016A239713BFBE6F00A605E4 /* Foundation.framework in Frameworks */,
-				01467C8A14F2F4DE0001C4B6 /* libKeenClient-Aggregate.a in Frameworks */,
+				014315B214F4B174001FF907 /* libKeenClient-Aggregate.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +169,7 @@
 		0111011714EF6F6D009794A5 /* KeenClient */ = {
 			isa = PBXGroup;
 			children = (
-				01467C8814F2F4DE0001C4B6 /* libKeenClient-Aggregate.a */,
+				014315B114F4B174001FF907 /* libKeenClient-Aggregate.a */,
 				01467C8914F2F4DE0001C4B6 /* KeenClient.h */,
 			);
 			name = KeenClient;
@@ -584,7 +584,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -594,10 +599,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/KeenClient-fbrempmyzeejllfqycmnmewgbkyt/Build/Products/Release-iphoneos\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -607,6 +614,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
@@ -617,6 +628,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/KeenClient-fbrempmyzeejllfqycmnmewgbkyt/Build/Products/Release-iphoneos\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

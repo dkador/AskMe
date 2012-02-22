@@ -50,7 +50,7 @@
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
-    [KeenClient clientForProject:@"abc" andAuthToken:@"123"];
+    [KeenClient clientForProject:@"4f386613a8438d182f000001" andAuthToken:@"83984bbb1526452aa1a077f4d77b9d53"];
     
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"app launched", @"name", [Util UUIDForDevice], @"user", nil];
     [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
