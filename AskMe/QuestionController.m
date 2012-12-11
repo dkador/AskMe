@@ -98,7 +98,7 @@
 
 - (void)nextSelected {
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user", @"entered question", @"name", nil];
-    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    [[KeenClient sharedClient] addEvent:event toEventCollection:@"flows" error:nil];
     
     ChoicesController *choicesController = [[ChoicesController alloc] initWithStyle:UITableViewStyleGrouped];
     [choicesController setQuestion:[[self questionTextView] text]];
@@ -111,8 +111,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     Boolean hasContent = [[[self questionTextView] text] length] > 0;
-    [[[self navigationItem] rightBarButtonItem] setEnabled:hasContent];
-    
+    [[[self navigationItem] rightBarButtonItem] setEnabled:hasContent];    
 }
 
 @end

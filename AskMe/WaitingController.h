@@ -17,7 +17,7 @@ extern NSString * const ServerHost;
 @property (nonatomic, retain) NSString *question;
 @property (nonatomic, retain) NSString *answer;
 @property (nonatomic, retain) NSArray *choices;
-@property (nonatomic, retain) NSNumber *questionId;
+@property (nonatomic, retain) NSString *questionId;
 @property (nonatomic) Boolean questionAlreadyCreated;
 @property (nonatomic, retain) NSTimer *refreshTimer;
 

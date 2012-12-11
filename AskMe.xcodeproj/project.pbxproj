@@ -7,8 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010EB08B1676D1B5002B07B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB08A1676D1B5002B07B6 /* CoreLocation.framework */; };
+		010EB0951676D5A1002B07B6 /* libKeenClient-Aggregate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB0921676D5A1002B07B6 /* libKeenClient-Aggregate.a */; };
+		010EB0971676D6AA002B07B6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB0961676D6AA002B07B6 /* Parse.framework */; };
+		010EB0991676D6E6002B07B6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB0981676D6E6002B07B6 /* AudioToolbox.framework */; };
+		010EB09B1676D6EB002B07B6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB09A1676D6EB002B07B6 /* Accounts.framework */; };
+		010EB09D1676D6F1002B07B6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB09C1676D6F1002B07B6 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		010EB09F1676D704002B07B6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB09E1676D704002B07B6 /* libsqlite3.dylib */; };
+		010EB0A11676D70A002B07B6 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB0A01676D70A002B07B6 /* libz.1.1.3.dylib */; };
+		010EB0A31676D717002B07B6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB0A21676D717002B07B6 /* QuartzCore.framework */; };
+		010EB0A51676D71D002B07B6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB0A41676D71C002B07B6 /* Security.framework */; };
+		010EB0A71676D722002B07B6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB0A61676D722002B07B6 /* Social.framework */; };
+		010EB0A91676D744002B07B6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010EB0A81676D744002B07B6 /* StoreKit.framework */; };
 		0142C9B7140ADBA00026CDFC /* NetCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0142C9B6140ADBA00026CDFC /* NetCheck.m */; };
-		014315B214F4B174001FF907 /* libKeenClient-Aggregate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 014315B114F4B174001FF907 /* libKeenClient-Aggregate.a */; };
 		016A239513BFBE6F00A605E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239413BFBE6F00A605E4 /* UIKit.framework */; };
 		016A239713BFBE6F00A605E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239613BFBE6F00A605E4 /* Foundation.framework */; };
 		016A239913BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016A239813BFBE6F00A605E4 /* CoreGraphics.framework */; };
@@ -61,10 +72,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010EB08A1676D1B5002B07B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		010EB0921676D5A1002B07B6 /* libKeenClient-Aggregate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKeenClient-Aggregate.a"; sourceTree = "<group>"; };
+		010EB0931676D5A1002B07B6 /* KeenClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeenClient.h; sourceTree = "<group>"; };
+		010EB0941676D5A1002B07B6 /* KeenProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeenProperties.h; sourceTree = "<group>"; };
+		010EB0961676D6AA002B07B6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		010EB0981676D6E6002B07B6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		010EB09A1676D6EB002B07B6 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		010EB09C1676D6F1002B07B6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		010EB09E1676D704002B07B6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		010EB0A01676D70A002B07B6 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		010EB0A21676D717002B07B6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		010EB0A41676D71C002B07B6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		010EB0A61676D722002B07B6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		010EB0A81676D744002B07B6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0142C9B5140ADBA00026CDFC /* NetCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetCheck.h; path = ext/NetCheck/NetCheck.h; sourceTree = "<group>"; };
 		0142C9B6140ADBA00026CDFC /* NetCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetCheck.m; path = ext/NetCheck/NetCheck.m; sourceTree = "<group>"; };
-		014315B114F4B174001FF907 /* libKeenClient-Aggregate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKeenClient-Aggregate.a"; sourceTree = "<group>"; };
-		01467C8914F2F4DE0001C4B6 /* KeenClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeenClient.h; sourceTree = "<group>"; };
 		016A239013BFBE6F00A605E4 /* AskMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AskMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016A239413BFBE6F00A605E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		016A239613BFBE6F00A605E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,14 +165,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01BA1B0D14E89C5B00CF9F84 /* libz.dylib in Frameworks */,
-				016A239913BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */,
-				016BA1BE13F778C2008A9C12 /* MobileCoreServices.framework in Frameworks */,
 				016BA1BC13F778B7008A9C12 /* SystemConfiguration.framework in Frameworks */,
+				010EB0A91676D744002B07B6 /* StoreKit.framework in Frameworks */,
+				010EB0A71676D722002B07B6 /* Social.framework in Frameworks */,
+				010EB0A51676D71D002B07B6 /* Security.framework in Frameworks */,
+				010EB0A31676D717002B07B6 /* QuartzCore.framework in Frameworks */,
+				016BA1BE13F778C2008A9C12 /* MobileCoreServices.framework in Frameworks */,
+				010EB0A11676D70A002B07B6 /* libz.1.1.3.dylib in Frameworks */,
+				010EB09F1676D704002B07B6 /* libsqlite3.dylib in Frameworks */,
+				016A239913BFBE6F00A605E4 /* CoreGraphics.framework in Frameworks */,
 				016BA1BA13F778A6008A9C12 /* CFNetwork.framework in Frameworks */,
+				010EB09D1676D6F1002B07B6 /* AdSupport.framework in Frameworks */,
+				010EB09B1676D6EB002B07B6 /* Accounts.framework in Frameworks */,
+				010EB0991676D6E6002B07B6 /* AudioToolbox.framework in Frameworks */,
+				010EB08B1676D1B5002B07B6 /* CoreLocation.framework in Frameworks */,
+				01BA1B0D14E89C5B00CF9F84 /* libz.dylib in Frameworks */,
 				016A239513BFBE6F00A605E4 /* UIKit.framework in Frameworks */,
 				016A239713BFBE6F00A605E4 /* Foundation.framework in Frameworks */,
-				014315B214F4B174001FF907 /* libKeenClient-Aggregate.a in Frameworks */,
+				010EB0951676D5A1002B07B6 /* libKeenClient-Aggregate.a in Frameworks */,
+				010EB0971676D6AA002B07B6 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,8 +203,9 @@
 		0111011714EF6F6D009794A5 /* KeenClient */ = {
 			isa = PBXGroup;
 			children = (
-				014315B114F4B174001FF907 /* libKeenClient-Aggregate.a */,
-				01467C8914F2F4DE0001C4B6 /* KeenClient.h */,
+				010EB0921676D5A1002B07B6 /* libKeenClient-Aggregate.a */,
+				010EB0931676D5A1002B07B6 /* KeenClient.h */,
+				010EB0941676D5A1002B07B6 /* KeenProperties.h */,
 			);
 			name = KeenClient;
 			sourceTree = "<group>";
@@ -187,6 +222,16 @@
 		016A238513BFBE6F00A605E4 = {
 			isa = PBXGroup;
 			children = (
+				010EB0A81676D744002B07B6 /* StoreKit.framework */,
+				010EB0A61676D722002B07B6 /* Social.framework */,
+				010EB0A41676D71C002B07B6 /* Security.framework */,
+				010EB0A21676D717002B07B6 /* QuartzCore.framework */,
+				010EB0A01676D70A002B07B6 /* libz.1.1.3.dylib */,
+				010EB09E1676D704002B07B6 /* libsqlite3.dylib */,
+				010EB09C1676D6F1002B07B6 /* AdSupport.framework */,
+				010EB09A1676D6EB002B07B6 /* Accounts.framework */,
+				010EB0981676D6E6002B07B6 /* AudioToolbox.framework */,
+				010EB08A1676D1B5002B07B6 /* CoreLocation.framework */,
 				01BA1B0C14E89C5B00CF9F84 /* libz.dylib */,
 				016BA1D813F8F406008A9C12 /* q-mark114x114.png */,
 				016BA1D513F8F401008A9C12 /* q-mark57x57.png */,
@@ -210,6 +255,7 @@
 		016A239313BFBE6F00A605E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				010EB0961676D6AA002B07B6 /* Parse.framework */,
 				016BA1C013F778DA008A9C12 /* libz.1.2.3.dylib */,
 				016BA1BF13F778CA008A9C12 /* CoreGraphics.framework */,
 				016BA1BD13F778C2008A9C12 /* MobileCoreServices.framework */,
@@ -406,7 +452,7 @@
 		016A238713BFBE6F00A605E4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = Dorkfort.com;
 			};
 			buildConfigurationList = 016A238A13BFBE6F00A605E4 /* Build configuration list for PBXProject "AskMe" */;
@@ -556,7 +602,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6B76A271-7D4F-4D65-9B94-63AD892FCACB";
 				SDKROOT = iphoneos;
@@ -573,7 +619,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -591,9 +637,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AskMe/AskMe-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "AskMe/AskMe-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -621,8 +672,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AskMe/AskMe-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "AskMe/AskMe-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (

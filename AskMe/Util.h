@@ -18,8 +18,8 @@
 + (void) setDeviceToken: (NSString *) deviceToken;
 + (void) removeDeviceToken;
 
-+ (NSNumber *) currentQuestionId;
-+ (void) setCurrentQuestionId: (NSNumber *) questionId;
++ (NSString *) currentQuestionId;
++ (void) setCurrentQuestionId: (NSString *) questionId;
 + (void) removeCurrentQuestionId;
 
 + (uint) getCurrentDeviceWidth;

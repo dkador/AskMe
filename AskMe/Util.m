@@ -37,12 +37,12 @@ NSString * const UUIDKey = @"UUIDKey";
     [defaults synchronize];
 }
 
-+ (NSNumber *) currentQuestionId {
++ (NSString *) currentQuestionId {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults objectForKey:CurrentQuestionId];
 }
 
-+ (void) setCurrentQuestionId: (NSNumber *) questionId {
++ (void) setCurrentQuestionId: (NSString *) questionId {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:questionId forKey:CurrentQuestionId];
     [defaults synchronize];

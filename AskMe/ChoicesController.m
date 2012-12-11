@@ -176,14 +176,25 @@
 # pragma mark - private implementation
 
 - (void) addSelected {
-    WaitingController *controller = [[WaitingController alloc] initWithQuestion:self.question AndChoices:self.choices];
-    [self.navigationController pushViewController:controller animated:YES];
-    [controller release];
-    
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user",
                            @"questions and choices finished", @"name", 
                            [NSNumber numberWithInt:self.choices.count], @"number", nil];
-    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    [[KeenClient sharedClient] addEvent:event toEventCollection:@"flows" error:nil];
+    
+    NSMutableDictionary *event2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user", 
+                                   self.question, @"question_asked",
+                                   [NSNumber numberWithUnsignedInteger:self.choices.count], @"number_of_answers_provided",
+                                   nil];
+    NSUInteger index = 1;
+    for (NSString *choice in self.choices) {
+        [event2 setValue:choice forKey:[NSString stringWithFormat:@"answer_choice_%i", index]];
+        index++;
+    }
+    [[KeenClient sharedClient] addEvent:event2 toEventCollection:@"ask_question" error:nil];
+    
+    WaitingController *controller = [[WaitingController alloc] initWithQuestion:self.question AndChoices:self.choices];
+    [self.navigationController pushViewController:controller animated:YES];
+    [controller release];
 }
 
 # pragma mark - AddChoiceControllerDelegate impl
@@ -197,7 +208,7 @@
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user", 
                            @"choice added", @"name", 
                            [NSNumber numberWithInt:self.choices.count], @"number", nil];
-    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    [[KeenClient sharedClient] addEvent:event toEventCollection:@"flows" error:nil];
 }
 
 @end

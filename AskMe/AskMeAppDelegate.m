@@ -11,6 +11,7 @@
 #import "WaitingController.h"
 #import "Util.h"
 #import "KeenClient.h"
+#import <Parse/Parse.h>
 
 
 @implementation AskMeAppDelegate
@@ -22,7 +23,10 @@
 
 @synthesize delegate;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {   
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Parse setApplicationId:@"BIRAkW1eCRXZRSdXBFgnlGjnNheBZmTCoFVIldZp"
+                  clientKey:@"axZX20S6DVy66q8z2GklHZx8kMgkNMKJt6XcfL26"];
+    
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     id remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     NSLog(@"remote: %@", remoteNotification);
@@ -35,7 +39,7 @@
     [navController release];
     self.window.rootViewController = self.viewController;
     
-    NSNumber *currentQuestionId = [Util currentQuestionId];
+    NSString *currentQuestionId = [Util currentQuestionId];
     if (currentQuestionId) {
         // go straight to it.
         WaitingController *waitingController = [[WaitingController alloc] initWithQuestion:nil AndChoices:nil];
@@ -50,10 +54,20 @@
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
-    [KeenClient clientForProject:@"4f386613a8438d182f000001" andAuthToken:@"83984bbb1526452aa1a077f4d77b9d53"];
+    [KeenClient sharedClientWithProjectId:@"4f386613a8438d182f000001" andApiKey:@"83984bbb1526452aa1a077f4d77b9d53"];
     
-    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"app launched", @"name", [Util UUIDForDevice], @"user", nil];
-    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    UIDevice *device = [UIDevice currentDevice];
+    NSDictionary *deviceInfo = [NSDictionary dictionaryWithObjectsAndKeys:device.systemName, @"systemName",
+                                device.systemVersion, @"systemVersion",
+                                device.model, @"model",
+                                device.localizedModel, @"localizedModel",
+                                device.batteryLevel, @"batteryLevel",
+                                nil];
+    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"app launched", @"name", 
+                           [Util UUIDForDevice], @"user", 
+                           deviceInfo, @"deviceInfo",
+                           nil];
+    [[KeenClient sharedClient] addEvent:event toEventCollection:@"flows" error:nil];
     
     return YES;
 }
@@ -63,8 +77,8 @@
         
     }];
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"app closed", @"name", [Util UUIDForDevice], @"user", nil];
-    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
-    [[KeenClient lastRequestedClient] uploadWithFinishedBlock:^(void){
+    [[KeenClient sharedClient] addEvent:event toEventCollection:@"flows" error:nil];
+    [[KeenClient sharedClient] uploadWithFinishedBlock:^(void){
         NSLog(@"Upload finished, ending background thread.");
         [application endBackgroundTask:taskId];
     }];
@@ -77,6 +91,16 @@
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"token 2: %@", token);
     [Util setDeviceToken:token];
+    
+    [PFPush storeDeviceToken:devToken]; // Send parse the device token
+    // Subscribe this user to the broadcast channel, ""
+    [PFPush subscribeToChannelInBackground:@"" block:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Successfully subscribed to the broadcast channel.");
+        } else {
+            NSLog(@"Failed to subscribe to the broadcast channel.");
+        }
+    }];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -87,7 +111,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     NSLog(@"got a remote notification %@", userInfo);
-    NSNumber *questionId = [userInfo objectForKey:@"question_id"];
+    NSString *questionId = [userInfo objectForKey:@"question_id"];
     if (questionId) {
         NSLog(@"remote notification had question %@", questionId);
         if ([self.viewController.visibleViewController isKindOfClass:[WaitingController class]]) {

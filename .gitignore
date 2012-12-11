@@ -1,5 +1,5 @@
 # Mac crap
-.DS_Store
+*.DS_Store
 
 # xcode noise
 build/

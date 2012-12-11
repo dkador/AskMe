@@ -15,6 +15,7 @@
 #import "KeenClient.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import <Parse/Parse.h>
 
 
 @implementation WaitingController
@@ -62,62 +63,29 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
     [item release];
     
     if (!self.questionAlreadyCreated) {
-        NSURL *url = [NSURL URLWithString:[ServerAddress stringByAppendingString:@"/questions.json"]];
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-
-        NSMutableDictionary *requestDict = [NSMutableDictionary dictionaryWithCapacity:1];
-        NSMutableDictionary *questionDict = [NSMutableDictionary dictionaryWithCapacity:2];
-        [questionDict setObject:self.question forKey:@"body"];
+        PFObject *parseQuestion = [PFObject objectWithClassName:@"Question"];
+        [parseQuestion setObject:self.question forKey:@"body"];
         if ([Util deviceToken]) {
-            NSLog(@"sending device token %@", [Util deviceToken]);
-            [questionDict setObject:[Util deviceToken] forKey:@"apns_device_token"];
+            [parseQuestion setObject:[Util deviceToken] forKey:@"apns_device_token"];
         }
-        NSMutableArray *choicesArray = [NSMutableArray arrayWithCapacity:self.choices.count];
+        NSMutableArray *parseChoicesArray = [NSMutableArray arrayWithCapacity:self.choices.count];
         for (NSString *choice in self.choices) {
-            NSDictionary *choiceDict = [NSDictionary dictionaryWithObject:choice forKey:@"body"];
-            [choicesArray addObject:choiceDict];
+            PFObject *parseChoice = [PFObject objectWithClassName:@"Choice"];
+            [parseChoice setObject:choice forKey:@"body"];
+            [parseChoicesArray addObject:parseChoice];
         }
-        [questionDict setObject:choicesArray forKey:@"choices"];
-        [requestDict setObject:questionDict forKey:@"question"];
-        NSError *error = nil;
-        NSData *jsonData = [[CJSONSerializer serializer] serializeDictionary:requestDict error:&error];
-        if (error) {
-            NSLog(@"An error occurred during serialization: %@", [error localizedDescription]);
-            [Util showErrorWithText:@"Could not create JSON request for your question!" AndTitle:@"Aw, Shucks"];
-        }
-        [request appendPostData:jsonData];
-        [request setRequestMethod:@"POST"];
-        request.requestHeaders = [NSMutableDictionary dictionaryWithObject:@"application/json" forKey:@"Content-Type"];
-        
-        [request setCompletionBlock:^{  
-            if (request.responseStatusCode == 201) {
-                NSData *jsonData = [request responseData];
-                NSError *error = nil;
-                NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
-                if (error) {
-                    NSLog(@"An error occurred during deserialization: %@", [error localizedDescription]);
-                    [Util showErrorWithText:@"Could not deserialize HTTP response!" AndTitle:@"Gee Whiz"];
-                }
-                NSNumber *theId = [[dict objectForKey:@"question"] objectForKey:@"id"];
+        [parseQuestion setObject:parseChoicesArray forKey:@"choices"];
+        [parseQuestion saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                NSString *theId = [parseQuestion objectId];
                 [Util setCurrentQuestionId:theId];
                 self.questionId = theId;
                 [self setupTimer];
             } else {
-                NSLog(@"something bad happened");
-                NSLog(@"An error occurred during question creation.");
-                NSLog(@"Response status code: %i", request.responseStatusCode);
-                NSLog(@"Response status message: %@", request.responseStatusMessage);
-                NSLog(@"Response: %@", request.responseString);
+                NSLog(@"Error: %@", [error localizedDescription]);
                 [Util showErrorWithText:@"Error sending question to server!" AndTitle:@"C'mon!"];
             }
         }];
-        [request setFailedBlock:^{
-            NSError *error = [request error];
-            NSLog(@"question create failed %@", [error localizedDescription]);
-            [Util showErrorWithText:@"Error sending question to server!" AndTitle:@"Golly!"];
-        }];
-        
-        [request startAsynchronous];
     } else {
         [self refresh];
     }
@@ -210,52 +178,53 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
 
 - (void) refresh {
     if (self.questionId) {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/%@.json", ServerAddress, self.questionId]];
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];   
-        [request setCompletionBlock:^{
-            NSData *jsonData = [request responseData];
-            NSError *error = nil;
-            NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
-            if (error) {
-                NSLog(@"An error occurred during question status deserialization: %@", [error localizedDescription]);
+        PFQuery *query = [PFQuery queryWithClassName:@"Question"];
+        [query includeKey:@"answer"];
+        [query includeKey:@"answer.choice"];
+        [query getObjectInBackgroundWithId:self.questionId block:^(PFObject *parseQuestion, NSError *error) {
+            if (!error) {
+                self.question = [parseQuestion objectForKey:@"body"];
+                PFObject *parseAnswer = [parseQuestion objectForKey:@"answer"];
+                if (parseAnswer) {
+                    [self.refreshTimer invalidate];
+                    self.navigationItem.title = @"Answered!";
+                    
+                    PFObject *choice = [parseAnswer objectForKey:@"choice"];
+                    if (choice) {
+                        self.answer = [choice objectForKey:@"body"];
+                    } else {
+                        id otherText = [parseAnswer objectForKey:@"other_text"];
+                        if (otherText == [NSNull null]) {
+                            otherText = @"";
+                        }
+                        self.answer = otherText;
+                    }
+                    [self.tableView reloadData];
+                    
+                    NSMutableDictionary *event2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user",
+                                                   self.question, @"question_asked",
+                                                   [NSNumber numberWithUnsignedInteger:self.choices.count], @"number_of_answers_provided",
+                                                   self.answer, @"answer_chosen",
+                                                   choice != nil ? @"Robot" : @"Human", @"chosen_by",
+                                                   nil];
+                    NSUInteger index = 1;
+                    for (NSString *choice in self.choices) {
+                        [event2 setValue:choice forKey:[NSString stringWithFormat:@"answer_choice_%i", index]];
+                        index++;
+                    }
+                    [[KeenClient sharedClient] addEvent:event2 toEventCollection:@"answer_received" error:nil];
+                }
+            } else {
+                NSLog(@"Error: %@", [error localizedDescription]);
                 [Util showErrorWithText:@"Error getting answer from server!" AndTitle:@"Weak"];
             }
-            NSDictionary *question = [dict objectForKey:@"question"];
-            self.question = [question objectForKey:@"body"];
-            NSDictionary *answer = [question objectForKey:@"answer"];
-            if (answer) {
-                [self.refreshTimer invalidate];
-                self.navigationItem.title = @"Answered!";
-                
-                id choiceId = [answer objectForKey:@"choice_id"];
-                if (choiceId != [NSNull null]) {
-                    NSArray *choices = [question objectForKey:@"choices"];
-                    for (NSDictionary *choice in choices) {
-                        if ([choiceId isEqualToNumber:[choice objectForKey:@"id"]]) {
-                            self.answer = [choice objectForKey:@"body"];
-                        }
-                    }                    
-                } else {
-                    id otherText = [answer objectForKey:@"other_text"];
-                    if (otherText == [NSNull null]) {
-                        otherText = @"";
-                    }
-                    self.answer = otherText;
-                }
-                [self.tableView reloadData];
-            }
         }];
-        [request setFailedBlock:^{
-            NSLog(@"Refresh failed: %@", request.error.localizedDescription);
-            [Util showErrorWithText:@"Error getting answer from server!" AndTitle:@"Bogus"];
-        }];
-        [request startAsynchronous];
     }
 }
 
 - (void) setupTimer {
     if (!self.refreshTimer || !self.refreshTimer.isValid) {        
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
         self.refreshTimer = timer;        
     }
 }
@@ -269,7 +238,7 @@ NSString * const ServerAddress = @"http://askme.herokuapp.com";
         event = [NSDictionary dictionaryWithObjectsAndKeys:[Util UUIDForDevice], @"user", 
                  @"asked new question after old one was answered", @"name", nil];
     }
-    [[KeenClient lastRequestedClient] addEvent:event toCollection:@"flows"];
+    [[KeenClient sharedClient] addEvent:event toEventCollection:@"flows" error:nil];
     
     [self.refreshTimer invalidate];
     [Util removeCurrentQuestionId];
